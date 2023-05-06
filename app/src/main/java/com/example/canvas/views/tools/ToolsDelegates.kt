@@ -25,15 +25,15 @@ fun colorAdapterDelegate(
         }
     }
 
-fun toolsAdapterDelegate(
-    onToolsClick: (Int) -> Unit
+fun toolAdapterDelegate(
+    onToolClick: (Int) -> Unit
 ): AdapterDelegate<List<ToolItem>> =
     adapterDelegateLayoutContainer<ToolItem.ToolModel, ToolItem>(
         R.layout.item_tool
     ) {
 
         val ivTool: ImageView = findViewById(R.id.ivTool)
-        itemView.setOnClickListener { onToolsClick(adapterPosition) }
+        itemView.setOnClickListener { onToolClick(adapterPosition) }
 
         bind {
             ivTool.setImageResource(item.type.value)

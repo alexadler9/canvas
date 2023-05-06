@@ -24,7 +24,7 @@ class ToolsLayout @JvmOverloads constructor(
         colorAdapterDelegate {
             onClick(it)
         },
-        toolsAdapterDelegate {
+        toolAdapterDelegate {
             onClick(it)
         }
     )
