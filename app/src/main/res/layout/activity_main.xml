@@ -74,6 +74,12 @@
             android:background="?attr/colorToolsBorder" />
 
         <include
+            android:id="@+id/layoutSizes"
+            layout="@layout/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <include
             android:id="@+id/layoutPalette"
             layout="@layout/layout_tools"
             android:layout_width="match_parent"

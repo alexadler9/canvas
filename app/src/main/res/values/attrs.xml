@@ -12,5 +12,6 @@
         <attr name="colorToolsBorder" format="color" />
         <attr name="colorToolsBackground" format="color" />
         <attr name="colorToolsSelectionBorder" format="color" />
+        <attr name="colorToolsText" format="color" />
     </declare-styleable>
 </resources>

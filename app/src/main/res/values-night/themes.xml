@@ -12,5 +12,6 @@
         <item name="colorToolsBorder">@color/gray_light</item>
         <item name="colorToolsBackground">?attr/colorBackground</item>
         <item name="colorToolsSelectionBorder">?attr/colorPrimary</item>
+        <item name="colorToolsText">@color/black</item>
     </style>
 </resources>

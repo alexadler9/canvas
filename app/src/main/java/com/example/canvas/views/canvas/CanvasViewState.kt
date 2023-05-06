@@ -5,7 +5,7 @@ import com.example.canvas.views.SIZE
 import com.example.canvas.views.TOOL
 
 data class CanvasViewState(
+    val tool: TOOL,
     val color: COLOR,
-    val size: SIZE,
-    val tool: TOOL
+    val size: SIZE
 )
