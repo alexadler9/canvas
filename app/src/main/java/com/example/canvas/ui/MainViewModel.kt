@@ -1,26 +1,31 @@
-package com.example.canvas
+package com.example.canvas.ui
 
 import com.example.base.BaseViewModel
 import com.example.base.Event
+import com.example.canvas.views.COLOR
+import com.example.canvas.views.SIZE
+import com.example.canvas.views.TOOL
+import com.example.canvas.views.canvas.CanvasViewState
+import com.example.canvas.views.tools.ToolItem
 
-class CanvasViewModel : BaseViewModel<ViewState>() {
+class MainViewModel : BaseViewModel<ViewState>() {
 
     override fun initialViewState(): ViewState = ViewState(
+        toolsList = enumValues<TOOL>().map { ToolItem.ToolModel(it) },
         colorList = enumValues<COLOR>().map { ToolItem.ColorModel(it.value) },
-        toolsList = enumValues<TOOLS>().map { ToolItem.ToolModel(it) },
+        isToolsVisible = false,
         isPaletteVisible = false,
-        isToolVisible = false,
         canvasViewState = CanvasViewState(
             color = COLOR.BLACK,
             size = SIZE.MEDIUM,
-            tools = TOOLS.NORMAL
+            tool = TOOL.NORMAL
         )
     )
 
     init {
         processDataEvent(
             DataEvent.OnSetDefaultTools(
-                tool = TOOLS.NORMAL,
+                tool = TOOL.NORMAL,
                 color = COLOR.BLACK
             )
         )
@@ -28,16 +33,30 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
 
     override fun reduce(event: Event, previousState: ViewState): ViewState? {
         when (event) {
-            is UiEvent.OnToolbarClicked -> {
+            is UiEvent.OnIconCleaningClicked -> {
                 return previousState.copy(
-                    isToolVisible = !previousState.isToolVisible,
+                    isToolsVisible = false,
+                    isPaletteVisible = false
+                )
+            }
+
+            is UiEvent.OnIconToolsClicked -> {
+                return previousState.copy(
+                    isToolsVisible = !previousState.isToolsVisible,
+                    isPaletteVisible = false
+                )
+            }
+
+            is UiEvent.OnCanvasClicked -> {
+                return previousState.copy(
+                    isToolsVisible = false,
                     isPaletteVisible = false
                 )
             }
 
             is UiEvent.OnToolsClicked -> {
                 when (event.index) {
-                    TOOLS.PALETTE.ordinal -> {
+                    TOOL.PALETTE.ordinal -> {
                         return previousState.copy(isPaletteVisible = !previousState.isPaletteVisible)
                     }
 
@@ -51,7 +70,8 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
                         }
                         return previousState.copy(
                             toolsList = toolsList,
-                            canvasViewState = previousState.canvasViewState.copy(tools = TOOLS.values()[event.index])
+                            isPaletteVisible = false,
+                            canvasViewState = previousState.canvasViewState.copy(tool = TOOL.values()[event.index])
                         )
                     }
                 }
@@ -60,7 +80,7 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
             is UiEvent.OnPaletteClicked -> {
                 val selectedColor = COLOR.values()[event.index]
                 val toolsList = previousState.toolsList.map() {
-                    if (it.type == TOOLS.PALETTE) {
+                    if (it.type == TOOL.PALETTE) {
                         it.copy(selectedColor = selectedColor)
                     } else {
                         it

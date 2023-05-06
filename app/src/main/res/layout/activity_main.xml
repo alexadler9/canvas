@@ -4,15 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/colorMainToolbarBackground"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textAppearance="@style/MainToolbarText.Title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivCleaning"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCleaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_baseline_delete_outline_24"
+            app:layout_constraintEnd_toStartOf="@id/ivTools"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorMainToolbarIcon" />
 
         <ImageView
             android:id="@+id/ivTools"
@@ -20,14 +44,14 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:src="@drawable/ic_baseline_brush_24"
+            app:tint="?attr/colorMainToolbarIcon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.example.canvas.DrawView
-        android:id="@+id/drawView"
+    <com.example.canvas.views.canvas.CanvasView
+        android:id="@+id/canvasView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,24 +59,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <include
-        android:id="@+id/layoutPalette"
-        layout="@layout/layout_tools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/layoutTools"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <include
-        android:id="@+id/layoutTools"
-        layout="@layout/layout_tools"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorToolsBackground"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorToolsBorder" />
+
+        <include
+            android:id="@+id/layoutPalette"
+            layout="@layout/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <include
+            android:id="@+id/layoutTools"
+            layout="@layout/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

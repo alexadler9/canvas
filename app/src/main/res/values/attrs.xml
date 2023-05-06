@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseTheme">
+        <!-- Theme attributes according to design system -->
+
+        <attr name="colorBackground" format="color" />
+
+        <attr name="colorMainToolbarBackground" format="color" />
+        <attr name="colorMainToolbarText" format="color" />
+        <attr name="colorMainToolbarIcon" format="color" />
+
+        <attr name="colorToolsBorder" format="color" />
+        <attr name="colorToolsBackground" format="color" />
+        <attr name="colorToolsSelectionBorder" format="color" />
+    </declare-styleable>
+</resources>

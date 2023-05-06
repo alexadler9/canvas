@@ -1,4 +1,4 @@
-package com.example.canvas
+package com.example.canvas.views.tools
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.base.setAdapterAndCleanupOnDetachFromWindow
 import com.example.base.setData
+import com.example.canvas.R
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
 class ToolsLayout @JvmOverloads constructor(
@@ -26,12 +27,6 @@ class ToolsLayout @JvmOverloads constructor(
         toolsAdapterDelegate {
             onClick(it)
         }
-//        sizeChangeAdapterDelegate {
-//            onClick(it)
-//        }
-//        toolsAdapterDelegate {
-//            onClick(it)
-//        }
     )
 
     override fun onAttachedToWindow() {

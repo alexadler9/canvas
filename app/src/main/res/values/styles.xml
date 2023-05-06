@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppText">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Main toolbar style -->
+
+    <style name="MainToolbarText" parent="AppText"></style>
+
+    <style name="MainToolbarText.Title">
+        <item name="android:textColor">?attr/colorMainToolbarText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

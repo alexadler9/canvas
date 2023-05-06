@@ -1,14 +1,16 @@
-package com.example.canvas
+package com.example.canvas.views.tools
 
 import android.graphics.PorterDuff
 import android.widget.ImageView
+import com.example.canvas.R
+import com.example.canvas.views.TOOL
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 
 fun colorAdapterDelegate(
     onClick: (Int) -> Unit
-): AdapterDelegate<List<Item>> =
-    adapterDelegateLayoutContainer<ToolItem.ColorModel, Item>(
+): AdapterDelegate<List<ToolItem>> =
+    adapterDelegateLayoutContainer<ToolItem.ColorModel, ToolItem>(
         R.layout.item_palette
     ) {
 
@@ -25,9 +27,9 @@ fun colorAdapterDelegate(
 
 fun toolsAdapterDelegate(
     onToolsClick: (Int) -> Unit
-): AdapterDelegate<List<Item>> =
-    adapterDelegateLayoutContainer<ToolItem.ToolModel, Item>(
-        R.layout.item_tools
+): AdapterDelegate<List<ToolItem>> =
+    adapterDelegateLayoutContainer<ToolItem.ToolModel, ToolItem>(
+        R.layout.item_tool
     ) {
 
         val ivTool: ImageView = findViewById(R.id.ivTool)
@@ -37,12 +39,7 @@ fun toolsAdapterDelegate(
             ivTool.setImageResource(item.type.value)
 
             when (item.type) {
-//                TOOLS.SIZE -> {
-//                    itemView.tvToolsText.visibility = View.VISIBLE
-//                    itemView.ivToolsText.text = item.selectedSize.value.toString()
-//                }
-
-                TOOLS.PALETTE -> {
+                TOOL.PALETTE -> {
                     ivTool.setColorFilter(
                         itemView.resources.getColor(item.selectedColor.value, null),
                         PorterDuff.Mode.SRC_IN

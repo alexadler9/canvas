@@ -1,13 +1,14 @@
-package com.example.canvas
+package com.example.canvas.views.tools
 
 import androidx.annotation.ColorRes
+import com.example.canvas.views.COLOR
+import com.example.canvas.views.TOOL
 
-sealed class ToolItem : Item {
+sealed class ToolItem {
     data class ColorModel(@ColorRes val color: Int) : ToolItem()
     data class ToolModel(
-        val type: TOOLS,
+        val type: TOOL,
         val isSelected: Boolean = false,
-//        val selectedSize: SIZE = SIZE.SMALL,
         val selectedColor: COLOR = COLOR.BLACK
     ) : ToolItem()
 }

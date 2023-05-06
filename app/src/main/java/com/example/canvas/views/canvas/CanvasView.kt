@@ -1,4 +1,4 @@
-package com.example.canvas
+package com.example.canvas.views.canvas
 
 import android.content.Context
 import android.graphics.*
@@ -7,9 +7,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import com.example.canvas.views.COLOR
+import com.example.canvas.views.TOOL
 import kotlin.math.abs
 
-class DrawView @JvmOverloads constructor(
+class CanvasView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -54,7 +56,7 @@ class DrawView @JvmOverloads constructor(
         drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
         paint.color = drawColor
         paint.strokeWidth = state.size.value.toFloat()
-        if (state.tools == TOOLS.DASH) {
+        if (state.tool == TOOL.DASH) {
             paint.pathEffect = DashPathEffect(
                 floatArrayOf(
                     state.size.value.toFloat() * 2,
