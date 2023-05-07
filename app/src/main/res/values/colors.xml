@@ -11,4 +11,6 @@
     <color name="orange">#FFFFA500</color>
     <color name="blue_cadet">#FF5F9EA0</color>
     <color name="purple_dark">#FF483D8B</color>
+    <color name="goldenrod">#FFDAA520</color>
+    <color name="chocolate">#FFD2691E</color>
 </resources>
