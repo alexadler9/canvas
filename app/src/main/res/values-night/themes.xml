@@ -11,6 +11,8 @@
 
         <item name="colorToolsBorder">@color/gray_light</item>
         <item name="colorToolsBackground">?attr/colorBackground</item>
-        <item name="colorToolsSelectionBorder">?attr/colorPrimary</item>
+        <item name="colorToolsSelectionBorder">@color/goldenrod</item>
+        <item name="colorToolsIcon">@color/gray_light</item>
+        <item name="colorToolsText">@color/gray_light</item>
     </style>
 </resources>

@@ -12,13 +12,15 @@ class MainViewModel : BaseViewModel<ViewState>() {
 
     override fun initialViewState(): ViewState = ViewState(
         toolsList = enumValues<TOOL>().map { ToolItem.ToolModel(it) },
-        colorList = enumValues<COLOR>().map { ToolItem.ColorModel(it.value) },
+        colorsList = enumValues<COLOR>().map { ToolItem.ColorModel(it.value) },
+        sizesList = enumValues<SIZE>().map { ToolItem.SizeModel(it.value) },
         isToolsVisible = false,
         isPaletteVisible = false,
+        isSizesVisible = false,
         canvasViewState = CanvasViewState(
+            tool = TOOL.NORMAL,
             color = COLOR.BLACK,
             size = SIZE.MEDIUM,
-            tool = TOOL.NORMAL
         )
     )
 
@@ -26,7 +28,8 @@ class MainViewModel : BaseViewModel<ViewState>() {
         processDataEvent(
             DataEvent.OnSetDefaultTools(
                 tool = TOOL.NORMAL,
-                color = COLOR.BLACK
+                color = COLOR.BLACK,
+                size = SIZE.MEDIUM
             )
         )
     }
@@ -36,28 +39,41 @@ class MainViewModel : BaseViewModel<ViewState>() {
             is UiEvent.OnIconCleaningClicked -> {
                 return previousState.copy(
                     isToolsVisible = false,
-                    isPaletteVisible = false
+                    isPaletteVisible = false,
+                    isSizesVisible = false
                 )
             }
 
             is UiEvent.OnIconToolsClicked -> {
                 return previousState.copy(
                     isToolsVisible = !previousState.isToolsVisible,
-                    isPaletteVisible = false
+                    isPaletteVisible = false,
+                    isSizesVisible = false
                 )
             }
 
             is UiEvent.OnCanvasClicked -> {
                 return previousState.copy(
                     isToolsVisible = false,
-                    isPaletteVisible = false
+                    isPaletteVisible = false,
+                    isSizesVisible = false
                 )
             }
 
-            is UiEvent.OnToolsClicked -> {
+            is UiEvent.OnToolClicked -> {
                 when (event.index) {
                     TOOL.PALETTE.ordinal -> {
-                        return previousState.copy(isPaletteVisible = !previousState.isPaletteVisible)
+                        return previousState.copy(
+                            isPaletteVisible = !previousState.isPaletteVisible,
+                            isSizesVisible = false
+                        )
+                    }
+
+                    TOOL.SIZE.ordinal -> {
+                        return previousState.copy(
+                            isPaletteVisible = false,
+                            isSizesVisible = !previousState.isSizesVisible
+                        )
                     }
 
                     else -> {
@@ -71,13 +87,14 @@ class MainViewModel : BaseViewModel<ViewState>() {
                         return previousState.copy(
                             toolsList = toolsList,
                             isPaletteVisible = false,
+                            isSizesVisible = false,
                             canvasViewState = previousState.canvasViewState.copy(tool = TOOL.values()[event.index])
                         )
                     }
                 }
             }
 
-            is UiEvent.OnPaletteClicked -> {
+            is UiEvent.OnColorClicked -> {
                 val selectedColor = COLOR.values()[event.index]
                 val toolsList = previousState.toolsList.map() {
                     if (it.type == TOOL.PALETTE) {
@@ -89,6 +106,21 @@ class MainViewModel : BaseViewModel<ViewState>() {
                 return previousState.copy(
                     toolsList = toolsList,
                     canvasViewState = previousState.canvasViewState.copy(color = selectedColor)
+                )
+            }
+
+            is UiEvent.OnSizeClicked -> {
+                val selectedSize = SIZE.values()[event.index]
+                val toolsList = previousState.toolsList.map() {
+                    if (it.type == TOOL.SIZE) {
+                        it.copy(selectedSize = selectedSize)
+                    } else {
+                        it
+                    }
+                }
+                return previousState.copy(
+                    toolsList = toolsList,
+                    canvasViewState = previousState.canvasViewState.copy(size = selectedSize)
                 )
             }
 
