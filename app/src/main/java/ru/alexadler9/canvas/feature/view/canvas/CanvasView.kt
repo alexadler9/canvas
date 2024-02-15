@@ -1,17 +1,15 @@
-package ru.alexadler9.canvas.feature.view
+package ru.alexadler9.canvas.feature.view.canvas
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import ru.alexadler9.canvas.R
+import ru.alexadler9.canvas.feature.view.Style
 import kotlin.math.abs
 
 class CanvasView @JvmOverloads constructor(
@@ -36,13 +34,35 @@ class CanvasView @JvmOverloads constructor(
     // Painting settings.
     private val paint = Paint().apply {
         color = ResourcesCompat.getColor(resources, R.color.black, null)
-        isAntiAlias = true          // Smooth out edges of what is drawn without affecting shape.
-        isDither =
-            true             // Dithering affects how colors with higher-precision than the device are down-sampled.
+        // Smooth out edges of what is drawn without affecting shape:
+        isAntiAlias = true
+        // Dithering affects how colors with higher-precision than the device are down-sampled:
+        isDither = true
         style = Paint.Style.STROKE
         strokeJoin = Paint.Join.ROUND
         strokeCap = Paint.Cap.ROUND
         strokeWidth = 12f
+    }
+
+    fun render(state: CanvasViewState) {
+        paint.color = ResourcesCompat.getColor(resources, state.color.value, null)
+        paint.strokeWidth = state.size.value.toFloat()
+        when (state.style) {
+            Style.DASH -> {
+                paint.pathEffect = DashPathEffect(
+                    floatArrayOf(
+                        state.size.value.toFloat() * 2,
+                        state.size.value.toFloat() * 2,
+                        state.size.value.toFloat() * 2,
+                        state.size.value.toFloat() * 2
+                    ), 0f
+                )
+            }
+
+            Style.NORMAL -> {
+                paint.pathEffect = null
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

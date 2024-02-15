@@ -6,13 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".feature.canvasscreen.ui.CanvasActivity">
 
-    <ru.alexadler9.canvas.feature.view.CanvasView
+    <ru.alexadler9.canvas.feature.view.canvas.CanvasView
         android:id="@+id/canvasView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/canvasView">
+
+        <Button
+            android:id="@+id/btnSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="РАЗМЕР" />
+
+        <Button
+            android:id="@+id/btnColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ЦВЕТ" />
+
+        <Button
+            android:id="@+id/btnStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="СТИЛЬ" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
