@@ -1,46 +1,45 @@
 package ru.alexadler9.canvas.feature.canvasscreen.ui
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.alexadler9.canvas.R
-import ru.alexadler9.canvas.feature.view.canvas.CanvasView
+import ru.alexadler9.canvas.databinding.ActivityCanvasBinding
 
 private const val TAG = "CANVAS_ACTIVITY"
 
 class CanvasActivity : AppCompatActivity() {
 
-    private val viewModel: CanvasViewModel by viewModels()
+    private lateinit var binding: ActivityCanvasBinding
 
-    private val canvasView: CanvasView by lazy { findViewById(R.id.canvasView) }
-    private val btnSize: Button by lazy { findViewById(R.id.btnSize) }
-    private val btnColor: Button by lazy { findViewById(R.id.btnColor) }
-    private val btnStyle: Button by lazy { findViewById(R.id.btnStyle) }
+    private val viewModel: CanvasViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_canvas)
+
+        binding = ActivityCanvasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel.viewState
             .onEach(::render)
             .launchIn(lifecycleScope)
 
-        btnSize.setOnClickListener {
-            viewModel.processUiAction(UiAction.OnSizeClicked)
-        }
-        btnColor.setOnClickListener {
-            viewModel.processUiAction(UiAction.OnColorClicked)
-        }
-        btnStyle.setOnClickListener {
-            viewModel.processUiAction(UiAction.OnStyleClicked)
+        with(binding) {
+            btnSize.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnSizeClicked)
+            }
+            btnColor.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnColorClicked)
+            }
+            btnStyle.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnStyleClicked)
+            }
         }
     }
 
     private fun render(viewState: ViewState) {
-        canvasView.render(viewState.canvasViewState)
+        binding.canvasView.render(viewState.canvasViewState)
     }
 }
