@@ -10,12 +10,15 @@ import ru.alexadler9.canvas.R
 /**
  * Adapter for palette tool.
  */
-fun colorAdapterDelegate(): AdapterDelegate<List<ToolItem>> =
+fun colorAdapterDelegate(
+    onClick: (Int) -> Unit
+): AdapterDelegate<List<ToolItem>> =
     adapterDelegateLayoutContainer<ToolItem.ColorModel, ToolItem>(
         R.layout.item_palette
     ) {
 
         val ivPalette: ImageView = findViewById(R.id.ivPalette)
+        itemView.setOnClickListener { onClick(adapterPosition) }
 
         bind {
             ivPalette.setColorFilter(

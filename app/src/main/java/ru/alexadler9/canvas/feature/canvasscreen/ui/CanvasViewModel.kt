@@ -45,12 +45,10 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
             }
 
             is UiAction.OnColorClicked -> {
-                val newColor = previousState.canvasViewState.color.run {
-                    Color.values()[(ordinal + 1) % Color.values().size]
-                }
-                Log.d(TAG, "Color changed ${newColor.name}")
+                val selectedColor = Color.values()[action.index]
+                Log.d(TAG, "Color changed ${selectedColor.name}")
                 previousState.copy(
-                    canvasViewState = previousState.canvasViewState.copy(color = newColor)
+                    canvasViewState = previousState.canvasViewState.copy(color = selectedColor)
                 )
             }
 

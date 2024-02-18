@@ -16,10 +16,14 @@ class ToolsLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : CardView(context, attrs, defStyleAttr) {
 
+    private var onClick: (Int) -> Unit = {}
+
     private val rvTools: RecyclerView by lazy { findViewById(R.id.rvTools) }
 
     private val adapterDelegate = ListDelegationAdapter(
-        colorAdapterDelegate()
+        colorAdapterDelegate {
+            onClick(it)
+        }
     )
 
     override fun onAttachedToWindow() {
@@ -33,5 +37,9 @@ class ToolsLayout @JvmOverloads constructor(
     fun render(list: List<ToolItem>) {
         adapterDelegate.items = list
         adapterDelegate.notifyDataSetChanged()
+    }
+
+    fun setOnClickListener(onClick: (Int) -> Unit) {
+        this.onClick = onClick
     }
 }

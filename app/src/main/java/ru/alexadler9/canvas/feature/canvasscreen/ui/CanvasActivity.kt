@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.alexadler9.canvas.databinding.ActivityCanvasBinding
-import ru.alexadler9.canvas.feature.view.tools.ToolsLayout
 
 private const val TAG = "CANVAS_ACTIVITY"
 
@@ -31,17 +30,19 @@ class CanvasActivity : AppCompatActivity() {
             btnSize.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnSizeClicked)
             }
-            btnColor.setOnClickListener {
-                viewModel.processUiAction(UiAction.OnColorClicked)
-            }
             btnStyle.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnStyleClicked)
+            }
+            layoutPalette.root.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnColorClicked(it))
             }
         }
     }
 
     private fun render(viewState: ViewState) {
-        binding.canvasView.render(viewState.canvasViewState)
-        (binding.layoutPalette as ToolsLayout).render(viewState.colorsList)
+        with(binding) {
+            canvasView.render(viewState.canvasViewState)
+            layoutPalette.root.render(viewState.colorsList)
+        }
     }
 }
