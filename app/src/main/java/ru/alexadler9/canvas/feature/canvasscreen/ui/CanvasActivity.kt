@@ -2,8 +2,8 @@ package ru.alexadler9.canvas.feature.canvasscreen.ui
 
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -14,6 +14,8 @@ private const val TAG = "CANVAS_ACTIVITY"
 
 class CanvasActivity : AppCompatActivity() {
 
+    private val viewModel: CanvasViewModel by viewModels()
+
     private val canvasView: CanvasView by lazy { findViewById(R.id.canvasView) }
     private val btnSize: Button by lazy { findViewById(R.id.btnSize) }
     private val btnColor: Button by lazy { findViewById(R.id.btnColor) }
@@ -22,8 +24,6 @@ class CanvasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_canvas)
-
-        val viewModel = ViewModelProvider(this).get(CanvasViewModel::class.java)
 
         viewModel.viewState
             .onEach(::render)
