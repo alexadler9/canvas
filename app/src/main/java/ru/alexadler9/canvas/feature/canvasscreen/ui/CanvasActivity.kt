@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.alexadler9.canvas.databinding.ActivityCanvasBinding
+import ru.alexadler9.canvas.feature.view.tools.ToolsLayout
 
 private const val TAG = "CANVAS_ACTIVITY"
 
@@ -41,5 +42,6 @@ class CanvasActivity : AppCompatActivity() {
 
     private fun render(viewState: ViewState) {
         binding.canvasView.render(viewState.canvasViewState)
+        (binding.layoutPalette as ToolsLayout).render(viewState.colorsList)
     }
 }

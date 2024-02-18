@@ -7,12 +7,14 @@ import ru.alexadler9.canvas.feature.view.Color
 import ru.alexadler9.canvas.feature.view.Size
 import ru.alexadler9.canvas.feature.view.Style
 import ru.alexadler9.canvas.feature.view.canvas.CanvasViewState
+import ru.alexadler9.canvas.feature.view.tools.ToolItem
 
 private const val TAG = "CANVAS_VM"
 
 class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override val initialViewState = ViewState(
+        colorsList = enumValues<Color>().map { ToolItem.ColorModel(it.value) },
         canvasViewState = CanvasViewState(
             style = Style.NORMAL,
             color = Color.BLACK,
