@@ -2,6 +2,7 @@ package ru.alexadler9.canvas.feature.view.tools
 
 import android.graphics.PorterDuff
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
@@ -25,5 +26,23 @@ fun colorAdapterDelegate(
                 ResourcesCompat.getColor(context.resources, item.color, null),
                 PorterDuff.Mode.SRC_IN
             )
+        }
+    }
+
+/**
+ * Adapter for size tool.
+ */
+fun sizeAdapterDelegate(
+    onClick: (Int) -> Unit
+): AdapterDelegate<List<ToolItem>> =
+    adapterDelegateLayoutContainer<ToolItem.SizeModel, ToolItem>(
+        R.layout.item_size
+    ) {
+
+        val tvSize: TextView = findViewById(R.id.tvSize)
+        itemView.setOnClickListener { onClick(adapterPosition) }
+
+        bind {
+            tvSize.text = getString(R.string.tool_size, item.size)
         }
     }

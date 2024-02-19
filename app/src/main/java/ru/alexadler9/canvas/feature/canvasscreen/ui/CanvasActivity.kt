@@ -27,14 +27,14 @@ class CanvasActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
 
         with(binding) {
-            btnSize.setOnClickListener {
-                viewModel.processUiAction(UiAction.OnSizeClicked)
-            }
             btnStyle.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnStyleClicked)
             }
             layoutPalette.root.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnColorClicked(it))
+            }
+            layoutSize.root.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnSizeClicked(it))
             }
         }
     }
@@ -43,6 +43,7 @@ class CanvasActivity : AppCompatActivity() {
         with(binding) {
             canvasView.render(viewState.canvasViewState)
             layoutPalette.root.render(viewState.colorsList)
+            layoutSize.root.render(viewState.sizesList)
         }
     }
 }

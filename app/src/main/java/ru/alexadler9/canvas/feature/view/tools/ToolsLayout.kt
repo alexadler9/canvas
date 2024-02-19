@@ -23,6 +23,9 @@ class ToolsLayout @JvmOverloads constructor(
     private val adapterDelegate = ListDelegationAdapter(
         colorAdapterDelegate {
             onClick(it)
+        },
+        sizeAdapterDelegate {
+            onClick(it)
         }
     )
 

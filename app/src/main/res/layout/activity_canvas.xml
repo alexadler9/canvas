@@ -25,12 +25,6 @@
         app:layout_constraintBottom_toTopOf="@id/tools">
 
         <Button
-            android:id="@+id/btnSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="РАЗМЕР" />
-
-        <Button
             android:id="@+id/btnStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,6 +41,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/layoutSize"
+            layout="@layout/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
 
         <include
             android:id="@+id/layoutPalette"

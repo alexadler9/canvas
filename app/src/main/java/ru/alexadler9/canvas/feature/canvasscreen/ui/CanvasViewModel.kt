@@ -14,6 +14,7 @@ private const val TAG = "CANVAS_VM"
 class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override val initialViewState = ViewState(
+        sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.ColorModel(it.value) },
         canvasViewState = CanvasViewState(
             style = Style.NORMAL,
@@ -35,12 +36,10 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
             }
 
             is UiAction.OnSizeClicked -> {
-                val newSize = previousState.canvasViewState.size.run {
-                    Size.values()[(ordinal + 1) % Size.values().size]
-                }
-                Log.d(TAG, "Size changed ${newSize.name}")
+                val selectedSize = Size.values()[action.index]
+                Log.d(TAG, "Size changed ${selectedSize.name}")
                 previousState.copy(
-                    canvasViewState = previousState.canvasViewState.copy(size = newSize)
+                    canvasViewState = previousState.canvasViewState.copy(size = selectedSize)
                 )
             }
 
