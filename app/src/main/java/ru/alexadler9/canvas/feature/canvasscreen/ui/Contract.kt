@@ -12,9 +12,11 @@ data class ViewState(
 )
 
 sealed class ViewEvent {
+    object OnClearCanvas : ViewEvent()
 }
 
 sealed class UiAction : Action {
+    object OnClearClicked : UiAction()
     data class OnStyleClicked(val index: Int) : UiAction()
     data class OnColorClicked(val index: Int) : UiAction()
     data class OnSizeClicked(val index: Int) : UiAction()

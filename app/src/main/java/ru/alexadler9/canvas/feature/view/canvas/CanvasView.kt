@@ -65,6 +65,11 @@ class CanvasView @JvmOverloads constructor(
         }
     }
 
+    fun clear() {
+        extraCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        invalidate()
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         touchX = event.x
