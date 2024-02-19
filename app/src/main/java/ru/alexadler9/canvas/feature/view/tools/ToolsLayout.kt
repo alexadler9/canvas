@@ -21,6 +21,9 @@ class ToolsLayout @JvmOverloads constructor(
     private val rvTools: RecyclerView by lazy { findViewById(R.id.rvTools) }
 
     private val adapterDelegate = ListDelegationAdapter(
+        styleAdapterDelegate {
+            onClick(it)
+        },
         colorAdapterDelegate {
             onClick(it)
         },

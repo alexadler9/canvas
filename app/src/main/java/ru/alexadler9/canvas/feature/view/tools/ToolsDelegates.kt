@@ -9,6 +9,24 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import ru.alexadler9.canvas.R
 
 /**
+ * Adapter for style tool.
+ */
+fun styleAdapterDelegate(
+    onToolClick: (Int) -> Unit
+): AdapterDelegate<List<ToolItem>> =
+    adapterDelegateLayoutContainer<ToolItem.StyleModel, ToolItem>(
+        R.layout.item_style
+    ) {
+
+        val ivStyle: ImageView = findViewById(R.id.ivStyle)
+        itemView.setOnClickListener { onToolClick(adapterPosition) }
+
+        bind {
+            ivStyle.setImageResource(item.style)
+        }
+    }
+
+/**
  * Adapter for palette tool.
  */
 fun colorAdapterDelegate(

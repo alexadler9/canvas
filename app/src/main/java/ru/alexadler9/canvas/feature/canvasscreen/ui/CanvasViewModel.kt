@@ -14,6 +14,7 @@ private const val TAG = "CANVAS_VM"
 class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override val initialViewState = ViewState(
+        stylesList = enumValues<Style>().map { ToolItem.StyleModel(it.value) },
         sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.ColorModel(it.value) },
         canvasViewState = CanvasViewState(
@@ -26,12 +27,10 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
     override fun reduce(action: Action, previousState: ViewState): ViewState? {
         return when (action) {
             is UiAction.OnStyleClicked -> {
-                val newStyle = previousState.canvasViewState.style.run {
-                    Style.values()[(ordinal + 1) % Style.values().size]
-                }
-                Log.d(TAG, "Style changed ${newStyle.name}")
+                val selectedStyle = Style.values()[action.index]
+                Log.d(TAG, "Style changed ${selectedStyle.name}")
                 previousState.copy(
-                    canvasViewState = previousState.canvasViewState.copy(style = newStyle)
+                    canvasViewState = previousState.canvasViewState.copy(style = selectedStyle)
                 )
             }
 

@@ -5,6 +5,7 @@ import ru.alexadler9.canvas.feature.view.canvas.CanvasViewState
 import ru.alexadler9.canvas.feature.view.tools.ToolItem
 
 data class ViewState(
+    val stylesList: List<ToolItem.StyleModel>,
     val sizesList: List<ToolItem.SizeModel>,
     val colorsList: List<ToolItem.ColorModel>,
     val canvasViewState: CanvasViewState
@@ -14,7 +15,7 @@ sealed class ViewEvent {
 }
 
 sealed class UiAction : Action {
-    object OnStyleClicked : UiAction()
+    data class OnStyleClicked(val index: Int) : UiAction()
     data class OnColorClicked(val index: Int) : UiAction()
     data class OnSizeClicked(val index: Int) : UiAction()
 }

@@ -11,26 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons"
+        app:layout_constraintBottom_toTopOf="@id/tools"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tools">
-
-        <Button
-            android:id="@+id/btnStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="СТИЛЬ" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tools"
@@ -41,6 +24,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/layoutStyle"
+            layout="@layout/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
 
         <include
             android:id="@+id/layoutSize"
