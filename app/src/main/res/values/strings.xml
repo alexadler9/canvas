@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Canvas</string>
+
     <string name="tool_size">x%1$d</string>
+
+    <string name="menu_clear">Очистить</string>
 </resources>

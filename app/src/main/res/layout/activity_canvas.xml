@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".feature.canvasscreen.ui.CanvasActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ru.alexadler9.canvas.feature.view.canvas.CanvasView
         android:id="@+id/canvasView"
         android:layout_width="match_parent"
@@ -13,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tools"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tools"
