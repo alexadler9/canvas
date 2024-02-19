@@ -26,6 +26,11 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override fun reduce(action: Action, previousState: ViewState): ViewState? {
         return when (action) {
+            is UiAction.OnClearClicked -> {
+                sendViewEvent(ViewEvent.OnClearCanvas)
+                null
+            }
+
             is UiAction.OnStyleClicked -> {
                 val selectedStyle = Style.values()[action.index]
                 Log.d(TAG, "Style changed ${selectedStyle.name}")

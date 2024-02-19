@@ -41,7 +41,14 @@ class CanvasActivity : AppCompatActivity() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection.
-                return true
+                return when (menuItem.itemId) {
+                    R.id.menuItemClear -> {
+                        viewModel.processUiAction(UiAction.OnClearClicked)
+                        true
+                    }
+
+                    else -> false
+                }
             }
         })
 
@@ -49,6 +56,10 @@ class CanvasActivity : AppCompatActivity() {
 
         viewModel.viewState
             .onEach(::render)
+            .launchIn(lifecycleScope)
+
+        viewModel.viewEvents
+            .onEach(::handleEvent)
             .launchIn(lifecycleScope)
 
         // Configure listeners for tools.
@@ -72,6 +83,16 @@ class CanvasActivity : AppCompatActivity() {
             layoutStyle.root.render(viewState.stylesList)
             layoutPalette.root.render(viewState.colorsList)
             layoutSize.root.render(viewState.sizesList)
+        }
+    }
+
+    private fun handleEvent(viewEvent: ViewEvent?) {
+        viewEvent?.let {
+            when (viewEvent) {
+                is ViewEvent.OnClearCanvas -> {
+                    binding.canvasView.clear()
+                }
+            }
         }
     }
 }
