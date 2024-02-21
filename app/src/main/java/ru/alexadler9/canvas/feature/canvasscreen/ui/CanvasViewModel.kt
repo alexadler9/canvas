@@ -32,6 +32,11 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override fun reduce(action: Action, previousState: ViewState): ViewState? {
         return when (action) {
+            is UiAction.OnClearClicked -> {
+                sendViewEvent(ViewEvent.OnClearCanvas)
+                null
+            }
+            
             is UiAction.OnToolClicked -> {
                 when (action.index) {
                     Tool.STYLE.ordinal -> {
@@ -58,7 +63,6 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
                         )
                     }
                 }
-                null
             }
 
             is UiAction.OnStyleClicked -> {
