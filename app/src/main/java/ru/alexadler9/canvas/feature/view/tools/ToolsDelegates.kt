@@ -26,6 +26,9 @@ fun toolAdapterDelegate(
 
         bind {
             ivTool.setImageResource(item.type.value)
+            ivTool.setBackgroundResource(
+                if (item.isSelected) R.drawable.background_selected else android.R.color.transparent
+            )
 
             when (item.type) {
                 Tool.STYLE -> {
@@ -47,9 +50,11 @@ fun toolAdapterDelegate(
 
                 Tool.SIZE -> {
                     // Display current size from the tool size.
-                    ivTool.isVisible = false
                     tvTool.isVisible = true
                     tvTool.text = getString(R.string.tool_size, item.selectedSize.value)
+                    tvTool.setBackgroundResource(
+                        if (item.isSelected) R.drawable.background_selected else android.R.color.transparent
+                    )
                 }
             }
         }

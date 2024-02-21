@@ -61,9 +61,13 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
             }
 
             is UiAction.OnToolClicked -> {
+                val toolsList = previousState.toolsList.mapIndexed { index, model ->
+                    model.copy(isSelected = index == action.index)
+                }
                 when (action.index) {
                     Tool.STYLE.ordinal -> {
                         return previousState.copy(
+                            toolsList = toolsList,
                             isStyleToolVisible = !previousState.isStyleToolVisible,
                             isPaletteToolVisible = false,
                             isSizeToolVisible = false
@@ -72,6 +76,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
                     Tool.PALETTE.ordinal -> {
                         return previousState.copy(
+                            toolsList = toolsList,
                             isStyleToolVisible = false,
                             isPaletteToolVisible = !previousState.isPaletteToolVisible,
                             isSizeToolVisible = false
@@ -80,6 +85,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
                     Tool.SIZE.ordinal -> {
                         return previousState.copy(
+                            toolsList = toolsList,
                             isStyleToolVisible = false,
                             isPaletteToolVisible = false,
                             isSizeToolVisible = !previousState.isSizeToolVisible

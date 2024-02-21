@@ -12,5 +12,5 @@ enum class Tool(
 ) {
     STYLE(R.drawable.shape_solid_line),
     PALETTE(R.drawable.ic_baseline_brightness_1_24),
-    SIZE(R.drawable.ic_baseline_settings_ethernet_24)
+    SIZE(android.R.color.transparent)
 }

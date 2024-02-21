@@ -29,6 +29,7 @@ sealed class ToolItem {
      */
     data class ToolModel(
         val type: Tool,
+        val isSelected: Boolean = false,
         val selectedStyle: Style = Style.NORMAL,
         val selectedColor: Color = Color.BLACK,
         val selectedSize: Size = Size.MEDIUM
