@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/ivTool"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="1dp"
+        android:padding="6dp"
+        android:src="@drawable/shape_solid_line"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvTool"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="1dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</LinearLayout>
+

@@ -3,6 +3,9 @@ package ru.alexadler9.canvas.feature.view
 import androidx.annotation.DrawableRes
 import ru.alexadler9.canvas.R
 
+/**
+ * List of styles for setting the canvas.
+ */
 enum class Style(
     @DrawableRes
     val value: Int

@@ -10,6 +10,10 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import ru.alexadler9.canvas.R
 import ru.alexadler9.canvas.base.setAdapterAndCleanupOnDetachFromWindow
 
+/**
+ * Endless panel of tools.
+ * Can display both a standalone tool and a parent tool containing other tools.
+ */
 class ToolsLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -24,10 +28,13 @@ class ToolsLayout @JvmOverloads constructor(
         styleAdapterDelegate {
             onClick(it)
         },
-        colorAdapterDelegate {
+        paletteAdapterDelegate {
             onClick(it)
         },
         sizeAdapterDelegate {
+            onClick(it)
+        },
+        toolAdapterDelegate {
             onClick(it)
         }
     )

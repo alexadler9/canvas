@@ -3,6 +3,7 @@ package ru.alexadler9.canvas.feature.canvasscreen.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,6 +28,9 @@ class CanvasActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
 
         with(binding) {
+            layoutTool.root.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnToolClicked(it))
+            }
             layoutStyle.root.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnStyleClicked(it))
             }
@@ -42,9 +46,22 @@ class CanvasActivity : AppCompatActivity() {
     private fun render(viewState: ViewState) {
         with(binding) {
             canvasView.render(viewState.canvasViewState)
-            layoutStyle.root.render(viewState.stylesList)
-            layoutPalette.root.render(viewState.colorsList)
-            layoutSize.root.render(viewState.sizesList)
+            with(layoutTool.root) {
+                render(viewState.toolsList)
+                isVisible = viewState.isToolsVisible
+            }
+            with(layoutStyle.root) {
+                render(viewState.stylesList)
+                isVisible = viewState.isStyleToolVisible
+            }
+            with(layoutPalette.root) {
+                render(viewState.colorsList)
+                isVisible = viewState.isPaletteToolVisible
+            }
+            with(layoutSize.root) {
+                render(viewState.sizesList)
+                isVisible = viewState.isSizesToolVisible
+            }
         }
     }
 }
