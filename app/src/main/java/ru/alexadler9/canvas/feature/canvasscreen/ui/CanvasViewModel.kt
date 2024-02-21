@@ -43,7 +43,12 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
             is UiAction.OnMenuClearClicked -> {
                 sendViewEvent(ViewEvent.OnClearCanvas)
-                null
+                return previousState.copy(
+                    isToolsVisible = false,
+                    isStyleToolVisible = false,
+                    isPaletteToolVisible = false,
+                    isSizeToolVisible = false
+                )
             }
 
             is UiAction.OnCanvasClicked -> {
