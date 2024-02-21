@@ -43,8 +43,13 @@ class CanvasActivity : AppCompatActivity() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection.
                 return when (menuItem.itemId) {
+                    R.id.menuItemTools -> {
+                        viewModel.processUiAction(UiAction.OnMenuToolsClicked)
+                        true
+                    }
+
                     R.id.menuItemClear -> {
-                        viewModel.processUiAction(UiAction.OnClearClicked)
+                        viewModel.processUiAction(UiAction.OnMenuClearClicked)
                         true
                     }
 

@@ -21,7 +21,8 @@ sealed class ViewEvent {
 }
 
 sealed class UiAction : Action {
-    object OnClearClicked : UiAction()
+    object OnMenuToolsClicked : UiAction()
+    object OnMenuClearClicked : UiAction()
     object OnCanvasClicked : UiAction()
     data class OnToolClicked(val index: Int) : UiAction()
     data class OnStyleClicked(val index: Int) : UiAction()
