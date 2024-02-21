@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.lifecycleScope
@@ -65,6 +66,9 @@ class CanvasActivity : AppCompatActivity() {
         // Configure listeners for tools.
 
         with(binding) {
+            layoutTool.root.setOnClickListener {
+                viewModel.processUiAction(UiAction.OnToolClicked(it))
+            }
             layoutStyle.root.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnStyleClicked(it))
             }
@@ -80,9 +84,22 @@ class CanvasActivity : AppCompatActivity() {
     private fun render(viewState: ViewState) {
         with(binding) {
             canvasView.render(viewState.canvasViewState)
-            layoutStyle.root.render(viewState.stylesList)
-            layoutPalette.root.render(viewState.colorsList)
-            layoutSize.root.render(viewState.sizesList)
+            with(layoutTool.root) {
+                render(viewState.toolsList)
+                isVisible = viewState.isToolsVisible
+            }
+            with(layoutStyle.root) {
+                render(viewState.stylesList)
+                isVisible = viewState.isStyleToolVisible
+            }
+            with(layoutPalette.root) {
+                render(viewState.colorsList)
+                isVisible = viewState.isPaletteToolVisible
+            }
+            with(layoutSize.root) {
+                render(viewState.sizesList)
+                isVisible = viewState.isSizesToolVisible
+            }
         }
     }
 

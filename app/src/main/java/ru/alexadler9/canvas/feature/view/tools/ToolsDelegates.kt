@@ -4,9 +4,55 @@ import android.graphics.PorterDuff
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import ru.alexadler9.canvas.R
+import ru.alexadler9.canvas.feature.view.Tool
+
+/**
+ * Adapter for parent tool containing other tools.
+ */
+fun toolAdapterDelegate(
+    onToolClick: (Int) -> Unit
+): AdapterDelegate<List<ToolItem>> =
+    adapterDelegateLayoutContainer<ToolItem.ToolModel, ToolItem>(
+        R.layout.item_tool
+    ) {
+
+        val ivTool: ImageView = findViewById(R.id.ivTool)
+        val tvTool: TextView = findViewById(R.id.tvTool)
+        itemView.setOnClickListener { onToolClick(adapterPosition) }
+
+        bind {
+            ivTool.setImageResource(item.type.value)
+
+            when (item.type) {
+                Tool.STYLE -> {
+                    // Nothing to do.
+                }
+
+                Tool.PALETTE -> {
+                    // Paint the tool image with the current color from the palette tool.
+                    ivTool.setColorFilter(
+                        ResourcesCompat.getColor(
+                            itemView.resources,
+                            item.selectedColor.value,
+                            null
+                        ),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
+
+                Tool.SIZE -> {
+                    // Display current size from the tool size.
+                    ivTool.isVisible = false
+                    tvTool.isVisible = true
+                    tvTool.text = getString(R.string.tool_size, item.selectedSize.value)
+                }
+            }
+        }
+    }
 
 /**
  * Adapter for style tool.
@@ -29,10 +75,10 @@ fun styleAdapterDelegate(
 /**
  * Adapter for palette tool.
  */
-fun colorAdapterDelegate(
+fun paletteAdapterDelegate(
     onClick: (Int) -> Unit
 ): AdapterDelegate<List<ToolItem>> =
-    adapterDelegateLayoutContainer<ToolItem.ColorModel, ToolItem>(
+    adapterDelegateLayoutContainer<ToolItem.PaletteModel, ToolItem>(
         R.layout.item_palette
     ) {
 
