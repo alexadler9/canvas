@@ -12,7 +12,7 @@ data class ViewState(
     val isToolsVisible: Boolean,
     val isStyleToolVisible: Boolean,
     val isPaletteToolVisible: Boolean,
-    val isSizesToolVisible: Boolean,
+    val isSizeToolVisible: Boolean,
     val canvasViewState: CanvasViewState
 )
 

@@ -22,7 +22,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
         isToolsVisible = true,
         isStyleToolVisible = false,
         isPaletteToolVisible = false,
-        isSizesToolVisible = false,
+        isSizeToolVisible = false,
         canvasViewState = CanvasViewState(
             style = Style.NORMAL,
             color = Color.BLACK,
@@ -43,7 +43,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
                         return previousState.copy(
                             isStyleToolVisible = !previousState.isStyleToolVisible,
                             isPaletteToolVisible = false,
-                            isSizesToolVisible = false
+                            isSizeToolVisible = false
                         )
                     }
 
@@ -51,7 +51,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
                         return previousState.copy(
                             isStyleToolVisible = false,
                             isPaletteToolVisible = !previousState.isPaletteToolVisible,
-                            isSizesToolVisible = false
+                            isSizeToolVisible = false
                         )
                     }
 
@@ -59,10 +59,11 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
                         return previousState.copy(
                             isStyleToolVisible = false,
                             isPaletteToolVisible = false,
-                            isSizesToolVisible = !previousState.isSizesToolVisible
+                            isSizeToolVisible = !previousState.isSizeToolVisible
                         )
                     }
                 }
+                null
             }
 
             is UiAction.OnStyleClicked -> {

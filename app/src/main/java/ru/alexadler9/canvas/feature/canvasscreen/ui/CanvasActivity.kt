@@ -98,7 +98,7 @@ class CanvasActivity : AppCompatActivity() {
             }
             with(layoutSize.root) {
                 render(viewState.sizesList)
-                isVisible = viewState.isSizesToolVisible
+                isVisible = viewState.isSizeToolVisible
             }
         }
     }
