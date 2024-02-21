@@ -29,7 +29,8 @@ fun toolAdapterDelegate(
 
             when (item.type) {
                 Tool.STYLE -> {
-                    // Nothing to do.
+                    // Display current style from the tool style.
+                    ivTool.setImageResource(item.selectedStyle.value)
                 }
 
                 Tool.PALETTE -> {
