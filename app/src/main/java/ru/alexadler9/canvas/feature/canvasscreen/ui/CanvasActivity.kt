@@ -6,9 +6,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -66,6 +66,9 @@ class CanvasActivity : AppCompatActivity() {
         // Configure listeners for tools.
 
         with(binding) {
+            canvasView.setOnClickField {
+                viewModel.processUiAction(UiAction.OnCanvasClicked)
+            }
             layoutTool.root.setOnClickListener {
                 viewModel.processUiAction(UiAction.OnToolClicked(it))
             }

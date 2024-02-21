@@ -18,6 +18,8 @@ class CanvasView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    private var onClick: () -> Unit = {}
+
     private var touchX = 0f
     private var touchY = 0f
 
@@ -70,6 +72,10 @@ class CanvasView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setOnClickField(onClickField: () -> Unit) {
+        onClick = onClickField
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         touchX = event.x
@@ -90,6 +96,7 @@ class CanvasView @JvmOverloads constructor(
     }
 
     private fun touchStart() {
+        onClick()
         path.reset()
         // Fixing the starting point.
         path.moveTo(touchX, touchY)

@@ -36,7 +36,15 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
                 sendViewEvent(ViewEvent.OnClearCanvas)
                 null
             }
-            
+
+            is UiAction.OnCanvasClicked -> {
+                return previousState.copy(
+                    isStyleToolVisible = false,
+                    isPaletteToolVisible = false,
+                    isSizeToolVisible = false
+                )
+            }
+
             is UiAction.OnToolClicked -> {
                 when (action.index) {
                     Tool.STYLE.ordinal -> {
