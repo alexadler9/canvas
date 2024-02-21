@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menuItemTools"
+        android:icon="@drawable/ic_baseline_brush_24"
+        android:title="@string/menu_tools"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menuItemClear"
         android:icon="@drawable/ic_baseline_delete_outline_24"
         android:title="@string/menu_clear"

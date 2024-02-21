@@ -19,7 +19,7 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
         stylesList = enumValues<Style>().map { ToolItem.StyleModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.PaletteModel(it.value) },
         sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
-        isToolsVisible = true,
+        isToolsVisible = false,
         isStyleToolVisible = false,
         isPaletteToolVisible = false,
         isSizeToolVisible = false,
@@ -32,13 +32,28 @@ class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
 
     override fun reduce(action: Action, previousState: ViewState): ViewState? {
         return when (action) {
-            is UiAction.OnClearClicked -> {
+            is UiAction.OnMenuToolsClicked -> {
+                previousState.copy(
+                    isToolsVisible = !previousState.isToolsVisible,
+                    isStyleToolVisible = false,
+                    isPaletteToolVisible = false,
+                    isSizeToolVisible = false
+                )
+            }
+
+            is UiAction.OnMenuClearClicked -> {
                 sendViewEvent(ViewEvent.OnClearCanvas)
-                null
+                return previousState.copy(
+                    isToolsVisible = false,
+                    isStyleToolVisible = false,
+                    isPaletteToolVisible = false,
+                    isSizeToolVisible = false
+                )
             }
 
             is UiAction.OnCanvasClicked -> {
                 return previousState.copy(
+                    isToolsVisible = false,
                     isStyleToolVisible = false,
                     isPaletteToolVisible = false,
                     isSizeToolVisible = false
