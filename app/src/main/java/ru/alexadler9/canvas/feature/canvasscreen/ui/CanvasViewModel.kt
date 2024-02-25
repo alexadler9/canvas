@@ -18,18 +18,25 @@ class CanvasViewModel(
 ) : BaseViewModel<ViewState, ViewEvent>() {
 
     override val initialViewState = ViewState(
-        toolsList = enumValues<Tool>().map { ToolItem.ToolModel(it) },
+        toolsList = enumValues<Tool>().map {
+            ToolItem.ToolModel(
+                type = it,
+                selectedStyle = repository.getStyle(),
+                selectedColor = repository.getColor(),
+                selectedSize = repository.getSize()
+            )
+        },
         stylesList = enumValues<Style>().map { ToolItem.StyleModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.PaletteModel(it.value) },
         sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
-        isToolsVisible = false,
+        isToolsVisible = true,
         isStyleToolVisible = false,
         isPaletteToolVisible = false,
         isSizeToolVisible = false,
         canvasViewState = CanvasViewState(
-            style = Style.NORMAL,
-            color = Color.BLACK,
-            size = Size.MEDIUM,
+            style = repository.getStyle(),
+            color = repository.getColor(),
+            size = repository.getSize(),
         )
     )
 
@@ -104,6 +111,7 @@ class CanvasViewModel(
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.STYLE) it.copy(selectedStyle = selectedStyle) else it
                 }
+                repository.setStyle(selectedStyle)
                 previousState.copy(
                     toolsList = toolsList,
                     canvasViewState = previousState.canvasViewState.copy(style = selectedStyle)
@@ -116,6 +124,7 @@ class CanvasViewModel(
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.PALETTE) it.copy(selectedColor = selectedColor) else it
                 }
+                repository.setColor(selectedColor)
                 previousState.copy(
                     toolsList = toolsList,
                     canvasViewState = previousState.canvasViewState.copy(color = selectedColor)
@@ -128,6 +137,7 @@ class CanvasViewModel(
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.SIZE) it.copy(selectedSize = selectedSize) else it
                 }
+                repository.setSize(selectedSize)
                 previousState.copy(
                     toolsList = toolsList,
                     canvasViewState = previousState.canvasViewState.copy(size = selectedSize)
