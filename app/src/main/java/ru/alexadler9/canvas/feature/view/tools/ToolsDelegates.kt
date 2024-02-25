@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import ru.alexadler9.canvas.R
-import ru.alexadler9.canvas.feature.view.Tool
+import ru.alexadler9.canvas.domain.Tool
 
 /**
  * Adapter for parent tool containing other tools.

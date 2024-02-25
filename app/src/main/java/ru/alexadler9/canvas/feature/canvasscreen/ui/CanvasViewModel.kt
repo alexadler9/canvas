@@ -4,10 +4,10 @@ import android.util.Log
 import ru.alexadler9.canvas.base.Action
 import ru.alexadler9.canvas.base.BaseViewModel
 import ru.alexadler9.canvas.data.PreferencesRepository
-import ru.alexadler9.canvas.feature.view.Color
-import ru.alexadler9.canvas.feature.view.Size
-import ru.alexadler9.canvas.feature.view.Style
-import ru.alexadler9.canvas.feature.view.Tool
+import ru.alexadler9.canvas.domain.Color
+import ru.alexadler9.canvas.domain.Size
+import ru.alexadler9.canvas.domain.Style
+import ru.alexadler9.canvas.domain.Tool
 import ru.alexadler9.canvas.feature.view.canvas.CanvasViewState
 import ru.alexadler9.canvas.feature.view.tools.ToolItem
 

@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import ru.alexadler9.canvas.R
-import ru.alexadler9.canvas.feature.view.Style
+import ru.alexadler9.canvas.domain.Style
 import kotlin.math.abs
 
 class CanvasView @JvmOverloads constructor(

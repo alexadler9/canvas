@@ -1,4 +1,4 @@
-package ru.alexadler9.canvas.feature.view
+package ru.alexadler9.canvas.domain
 
 import androidx.annotation.ColorRes
 import ru.alexadler9.canvas.R

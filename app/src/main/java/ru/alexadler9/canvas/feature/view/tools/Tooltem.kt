@@ -2,10 +2,10 @@ package ru.alexadler9.canvas.feature.view.tools
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import ru.alexadler9.canvas.feature.view.Color
-import ru.alexadler9.canvas.feature.view.Size
-import ru.alexadler9.canvas.feature.view.Style
-import ru.alexadler9.canvas.feature.view.Tool
+import ru.alexadler9.canvas.domain.Color
+import ru.alexadler9.canvas.domain.Size
+import ru.alexadler9.canvas.domain.Style
+import ru.alexadler9.canvas.domain.Tool
 
 sealed class ToolItem {
 

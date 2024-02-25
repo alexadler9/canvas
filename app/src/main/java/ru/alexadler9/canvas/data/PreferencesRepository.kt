@@ -2,9 +2,9 @@ package ru.alexadler9.canvas.data
 
 import ru.alexadler9.canvas.base.enumContains
 import ru.alexadler9.canvas.data.local.AppPreferencesSource
-import ru.alexadler9.canvas.feature.view.Color
-import ru.alexadler9.canvas.feature.view.Size
-import ru.alexadler9.canvas.feature.view.Style
+import ru.alexadler9.canvas.domain.Color
+import ru.alexadler9.canvas.domain.Size
+import ru.alexadler9.canvas.domain.Style
 
 /**
  * Repository for working with local app settings.
