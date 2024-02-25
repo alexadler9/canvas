@@ -3,6 +3,7 @@ package ru.alexadler9.canvas.feature.canvasscreen.ui
 import android.util.Log
 import ru.alexadler9.canvas.base.Action
 import ru.alexadler9.canvas.base.BaseViewModel
+import ru.alexadler9.canvas.data.PreferencesRepository
 import ru.alexadler9.canvas.feature.view.Color
 import ru.alexadler9.canvas.feature.view.Size
 import ru.alexadler9.canvas.feature.view.Style
@@ -12,7 +13,9 @@ import ru.alexadler9.canvas.feature.view.tools.ToolItem
 
 private const val TAG = "CANVAS_VM"
 
-class CanvasViewModel : BaseViewModel<ViewState, ViewEvent>() {
+class CanvasViewModel(
+    private val repository: PreferencesRepository
+) : BaseViewModel<ViewState, ViewEvent>() {
 
     override val initialViewState = ViewState(
         toolsList = enumValues<Tool>().map { ToolItem.ToolModel(it) },
