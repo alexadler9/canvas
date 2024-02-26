@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -61,6 +62,9 @@ dependencies {
     // This library incorporates annotation processing to ensure the compile time verification for user-defined shared preferences
     implementation "co.windly:ktx-prefs:$prefs_version"
     kapt "co.windly:ktx-prefs-compiler:$prefs_version"
+    // Dependency injection library based Dagger
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     testImplementation 'junit:junit:4.13.2'
 
