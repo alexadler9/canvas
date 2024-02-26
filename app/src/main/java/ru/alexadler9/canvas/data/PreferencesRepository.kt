@@ -1,15 +1,20 @@
 package ru.alexadler9.canvas.data
 
 import ru.alexadler9.canvas.base.enumContains
-import ru.alexadler9.canvas.data.local.AppPreferencesSource
+import ru.alexadler9.canvas.data.local.IAppPreferencesSource
 import ru.alexadler9.canvas.domain.Color
 import ru.alexadler9.canvas.domain.Size
 import ru.alexadler9.canvas.domain.Style
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Repository for working with local app settings.
  */
-class PreferencesRepository(private val appPreferencesSource: AppPreferencesSource) {
+@Singleton
+class PreferencesRepository @Inject constructor(
+    private val appPreferencesSource: IAppPreferencesSource
+) {
 
     /**
      * Get the last selected style for setting the canvas.

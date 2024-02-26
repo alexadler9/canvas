@@ -10,28 +10,20 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.alexadler9.canvas.R
-import ru.alexadler9.canvas.data.PreferencesRepository
-import ru.alexadler9.canvas.data.local.AppPreferencesSource
 import ru.alexadler9.canvas.databinding.ActivityCanvasBinding
 
 private const val TAG = "CANVAS_ACTIVITY"
 
+@AndroidEntryPoint
 class CanvasActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCanvasBinding
 
-    private val viewModel: CanvasViewModel by viewModels {
-        CanvasViewModelFactory(
-            PreferencesRepository(
-                AppPreferencesSource(
-                    applicationContext
-                )
-            )
-        )
-    }
+    private val viewModel: CanvasViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
