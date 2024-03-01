@@ -1,6 +1,5 @@
 package ru.alexadler9.canvas.feature.canvasscreen.ui
 
-import android.util.Log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.alexadler9.canvas.base.Action
 import ru.alexadler9.canvas.base.BaseViewModel
@@ -32,7 +31,7 @@ class CanvasViewModel @Inject constructor(
         stylesList = enumValues<Style>().map { ToolItem.StyleModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.PaletteModel(it.value) },
         sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
-        isToolsVisible = true,
+        isToolsVisible = false,
         isStyleToolVisible = false,
         isPaletteToolVisible = false,
         isSizeToolVisible = false,
@@ -110,7 +109,7 @@ class CanvasViewModel @Inject constructor(
 
             is UiAction.OnStyleClicked -> {
                 val selectedStyle = Style.values()[action.index]
-                Log.d(TAG, "Style changed ${selectedStyle.name}")
+//                Log.d(TAG, "Style changed ${selectedStyle.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.STYLE) it.copy(selectedStyle = selectedStyle) else it
                 }
@@ -123,7 +122,7 @@ class CanvasViewModel @Inject constructor(
 
             is UiAction.OnColorClicked -> {
                 val selectedColor = Color.values()[action.index]
-                Log.d(TAG, "Color changed ${selectedColor.name}")
+//                Log.d(TAG, "Color changed ${selectedColor.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.PALETTE) it.copy(selectedColor = selectedColor) else it
                 }
@@ -136,7 +135,7 @@ class CanvasViewModel @Inject constructor(
 
             is UiAction.OnSizeClicked -> {
                 val selectedSize = Size.values()[action.index]
-                Log.d(TAG, "Size changed ${selectedSize.name}")
+//                Log.d(TAG, "Size changed ${selectedSize.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.SIZE) it.copy(selectedSize = selectedSize) else it
                 }
