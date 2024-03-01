@@ -31,10 +31,8 @@ class CanvasViewModel @Inject constructor(
         stylesList = enumValues<Style>().map { ToolItem.StyleModel(it.value) },
         colorsList = enumValues<Color>().map { ToolItem.PaletteModel(it.value) },
         sizesList = enumValues<Size>().map { ToolItem.SizeModel(it.value) },
-        isToolsVisible = false,
-        isStyleToolVisible = false,
-        isPaletteToolVisible = false,
-        isSizeToolVisible = false,
+        toolsPanelVisible = false,
+        toolsVisibility = MutableList(Tool.values().size) { false },
         canvasViewState = CanvasViewState(
             style = repository.getStyle(),
             color = repository.getColor(),
@@ -49,82 +47,50 @@ class CanvasViewModel @Inject constructor(
                 model.copy(isSelected = false)
             }
 
-        fun toolSelect(actionIndex: Int) =
+        fun toolSelect(toolIndex: Int) =
             previousState.toolsList.mapIndexed { index, model ->
-                model.copy(isSelected = (index == actionIndex))
+                model.copy(isSelected = (index == toolIndex))
             }
 
         return when (action) {
             is UiAction.OnMenuToolsClicked -> {
                 previousState.copy(
                     toolsList = toolsHideSelection(),
-                    isToolsVisible = !previousState.isToolsVisible,
-                    isStyleToolVisible = false,
-                    isPaletteToolVisible = false,
-                    isSizeToolVisible = false
+                    toolsPanelVisible = !previousState.toolsPanelVisible,
+                    toolsVisibility = MutableList(Tool.values().size) { false },
                 )
             }
 
             is UiAction.OnMenuClearClicked -> {
                 sendViewEvent(ViewEvent.OnClearCanvas)
-                return previousState.copy(
-                    isToolsVisible = false,
-                    isStyleToolVisible = false,
-                    isPaletteToolVisible = false,
-                    isSizeToolVisible = false
+                previousState.copy(
+                    toolsPanelVisible = false,
+                    toolsVisibility = MutableList(Tool.values().size) { false },
                 )
             }
 
             is UiAction.OnCanvasClicked -> {
-                return previousState.copy(
-                    isToolsVisible = false,
-                    isStyleToolVisible = false,
-                    isPaletteToolVisible = false,
-                    isSizeToolVisible = false
+                previousState.copy(
+                    toolsPanelVisible = false,
+                    toolsVisibility = MutableList(Tool.values().size) { false },
                 )
             }
 
             is UiAction.OnToolClicked -> {
-                when (action.index) {
-                    Tool.STYLE.ordinal -> {
-                        return previousState.copy(
-                            toolsList = if (previousState.isStyleToolVisible) toolsHideSelection() else toolSelect(
-                                Tool.STYLE.ordinal
-                            ),
-                            isStyleToolVisible = !previousState.isStyleToolVisible,
-                            isPaletteToolVisible = false,
-                            isSizeToolVisible = false
+                val toolVisibility = previousState.toolsVisibility[action.index]
+                return previousState.copy(
+                    toolsList = if (toolVisibility) toolsHideSelection() else toolSelect(action.index),
+                    toolsVisibility = MutableList(Tool.values().size) { false }.apply {
+                        set(
+                            action.index,
+                            !toolVisibility
                         )
                     }
-
-                    Tool.PALETTE.ordinal -> {
-                        return previousState.copy(
-                            toolsList = if (previousState.isPaletteToolVisible) toolsHideSelection() else toolSelect(
-                                Tool.PALETTE.ordinal
-                            ),
-                            isStyleToolVisible = false,
-                            isPaletteToolVisible = !previousState.isPaletteToolVisible,
-                            isSizeToolVisible = false
-                        )
-                    }
-
-                    Tool.SIZE.ordinal -> {
-                        return previousState.copy(
-                            toolsList = if (previousState.isSizeToolVisible) toolsHideSelection() else toolSelect(
-                                Tool.SIZE.ordinal
-                            ),
-                            isStyleToolVisible = false,
-                            isPaletteToolVisible = false,
-                            isSizeToolVisible = !previousState.isSizeToolVisible
-                        )
-                    }
-                }
-                null
+                )
             }
 
             is UiAction.OnStyleClicked -> {
                 val selectedStyle = Style.values()[action.index]
-//                Log.d(TAG, "Style changed ${selectedStyle.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.STYLE) it.copy(selectedStyle = selectedStyle) else it
                 }
@@ -137,7 +103,6 @@ class CanvasViewModel @Inject constructor(
 
             is UiAction.OnColorClicked -> {
                 val selectedColor = Color.values()[action.index]
-//                Log.d(TAG, "Color changed ${selectedColor.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.PALETTE) it.copy(selectedColor = selectedColor) else it
                 }
@@ -150,7 +115,6 @@ class CanvasViewModel @Inject constructor(
 
             is UiAction.OnSizeClicked -> {
                 val selectedSize = Size.values()[action.index]
-//                Log.d(TAG, "Size changed ${selectedSize.name}")
                 val toolsList = previousState.toolsList.map {
                     if (it.type == Tool.SIZE) it.copy(selectedSize = selectedSize) else it
                 }

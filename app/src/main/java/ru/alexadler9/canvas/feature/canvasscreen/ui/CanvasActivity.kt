@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.alexadler9.canvas.R
 import ru.alexadler9.canvas.databinding.ActivityCanvasBinding
+import ru.alexadler9.canvas.domain.Tool
 
 private const val TAG = "CANVAS_ACTIVITY"
 
@@ -96,19 +97,19 @@ class CanvasActivity : AppCompatActivity() {
             canvasView.render(viewState.canvasViewState)
             with(layoutTool.root) {
                 render(viewState.toolsList)
-                isVisible = viewState.isToolsVisible
+                isVisible = viewState.toolsPanelVisible
             }
             with(layoutStyle.root) {
                 render(viewState.stylesList)
-                isVisible = viewState.isStyleToolVisible
+                isVisible = viewState.toolsVisibility[Tool.STYLE.ordinal]
             }
             with(layoutPalette.root) {
                 render(viewState.colorsList)
-                isVisible = viewState.isPaletteToolVisible
+                isVisible = viewState.toolsVisibility[Tool.PALETTE.ordinal]
             }
             with(layoutSize.root) {
                 render(viewState.sizesList)
-                isVisible = viewState.isSizeToolVisible
+                isVisible = viewState.toolsVisibility[Tool.SIZE.ordinal]
             }
         }
     }

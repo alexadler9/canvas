@@ -9,10 +9,8 @@ data class ViewState(
     val stylesList: List<ToolItem.StyleModel>,
     val colorsList: List<ToolItem.PaletteModel>,
     val sizesList: List<ToolItem.SizeModel>,
-    val isToolsVisible: Boolean,
-    val isStyleToolVisible: Boolean,
-    val isPaletteToolVisible: Boolean,
-    val isSizeToolVisible: Boolean,
+    val toolsPanelVisible: Boolean,
+    val toolsVisibility: MutableList<Boolean>,
     val canvasViewState: CanvasViewState
 )
 
