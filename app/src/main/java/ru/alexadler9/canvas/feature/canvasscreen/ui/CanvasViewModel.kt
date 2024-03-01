@@ -43,9 +43,21 @@ class CanvasViewModel @Inject constructor(
     )
 
     override fun reduce(action: Action, previousState: ViewState): ViewState? {
+
+        fun toolsHideSelection() =
+            previousState.toolsList.map { model ->
+                model.copy(isSelected = false)
+            }
+
+        fun toolSelect(actionIndex: Int) =
+            previousState.toolsList.mapIndexed { index, model ->
+                model.copy(isSelected = (index == actionIndex))
+            }
+
         return when (action) {
             is UiAction.OnMenuToolsClicked -> {
                 previousState.copy(
+                    toolsList = toolsHideSelection(),
                     isToolsVisible = !previousState.isToolsVisible,
                     isStyleToolVisible = false,
                     isPaletteToolVisible = false,
@@ -73,13 +85,12 @@ class CanvasViewModel @Inject constructor(
             }
 
             is UiAction.OnToolClicked -> {
-                val toolsList = previousState.toolsList.mapIndexed { index, model ->
-                    model.copy(isSelected = index == action.index)
-                }
                 when (action.index) {
                     Tool.STYLE.ordinal -> {
                         return previousState.copy(
-                            toolsList = toolsList,
+                            toolsList = if (previousState.isStyleToolVisible) toolsHideSelection() else toolSelect(
+                                Tool.STYLE.ordinal
+                            ),
                             isStyleToolVisible = !previousState.isStyleToolVisible,
                             isPaletteToolVisible = false,
                             isSizeToolVisible = false
@@ -88,7 +99,9 @@ class CanvasViewModel @Inject constructor(
 
                     Tool.PALETTE.ordinal -> {
                         return previousState.copy(
-                            toolsList = toolsList,
+                            toolsList = if (previousState.isPaletteToolVisible) toolsHideSelection() else toolSelect(
+                                Tool.PALETTE.ordinal
+                            ),
                             isStyleToolVisible = false,
                             isPaletteToolVisible = !previousState.isPaletteToolVisible,
                             isSizeToolVisible = false
@@ -97,7 +110,9 @@ class CanvasViewModel @Inject constructor(
 
                     Tool.SIZE.ordinal -> {
                         return previousState.copy(
-                            toolsList = toolsList,
+                            toolsList = if (previousState.isSizeToolVisible) toolsHideSelection() else toolSelect(
+                                Tool.SIZE.ordinal
+                            ),
                             isStyleToolVisible = false,
                             isPaletteToolVisible = false,
                             isSizeToolVisible = !previousState.isSizeToolVisible
