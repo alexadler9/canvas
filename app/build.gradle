@@ -52,6 +52,7 @@ dependencies {
     def adapter_delegates_version = "4.3.0"
     def prefs_version = "1.5.0"
     def junit5_version = "5.10.1"
+    def espresso_version = "3.5.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -83,5 +84,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:5.2.0'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
 }
