@@ -1,11 +1,8 @@
 package ru.alexadler9.canvas.feature.canvasscreen.ui
 
-import android.view.View
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -13,8 +10,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.Matcher
-import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
@@ -26,6 +21,7 @@ import ru.alexadler9.canvas.domain.Color
 import ru.alexadler9.canvas.domain.Size
 import ru.alexadler9.canvas.domain.Style
 import ru.alexadler9.canvas.domain.Tool
+import ru.alexadler9.canvas.utility.RecyclerViewItemCountAssertion
 
 @RunWith(AndroidJUnit4::class)
 class CanvasActivityInstrumentedTest {
@@ -121,14 +117,3 @@ class CanvasActivityInstrumentedTest {
     }
 }
 
-class RecyclerViewItemCountAssertion(private val matcher: Matcher<Int?>) : ViewAssertion {
-
-    override fun check(view: View, noViewFoundException: NoMatchingViewException?) {
-        if (noViewFoundException != null) {
-            throw noViewFoundException
-        }
-        val recyclerView = view as RecyclerView
-        val adapter = recyclerView.adapter
-        MatcherAssert.assertThat(adapter!!.itemCount, matcher)
-    }
-}
