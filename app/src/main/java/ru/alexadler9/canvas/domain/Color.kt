@@ -8,5 +8,11 @@ import ru.alexadler9.canvas.R
  */
 enum class Color(@ColorRes val value: Int) {
     BLACK(R.color.black),
-    TEAL(R.color.teal_700)
+    RED(R.color.red),
+    GREEN(R.color.green),
+    BLUE(R.color.blue),
+    TEAL(R.color.teal_700),
+    PURPLE(R.color.purple_500),
+    YELLOW(R.color.yellow),
+    ORANGE(R.color.orange)
 }

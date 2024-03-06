@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackground" format="color" />
+    <!-- Status bar. -->
+    <attr name="colorToolbarIconTint" format="color" />
+    <!-- Tools. -->
+    <attr name="colorToolsPanelBorder" format="color" />
+    <attr name="colorToolsPanelBackground" format="color" />
+    <attr name="colorToolsSelectedBorder" format="color" />
+    <attr name="colorToolsIcon" format="color" />
+    <attr name="colorToolsText" format="color" />
+</resources>
