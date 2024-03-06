@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Tools style -->
+
+    <style name="ToolsTextAppearance" parent="AppTextAppearance">
+        <item name="android:textColor">?attr/colorToolsText</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ToolsTextStyle">
+        <item name="android:textAppearance">@style/ToolsTextAppearance</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>
